@@ -2,6 +2,7 @@ const express = require("express");
 const authRoutes = require("./routes/authRoutes");
 const todoRoutes = require("./routes/todoRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const adminTodoRoutes = require("./routes/adminTodoRoutes");
 const errorMiddleware = require("./middleware/errorMiddleware");
 
 const app = express();
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/todos", todoRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/admin/todos", adminTodoRoutes);
 
 // Error middleware must be last
 app.use(errorMiddleware);
