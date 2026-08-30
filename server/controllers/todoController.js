@@ -112,7 +112,7 @@ const updateTodo = async (req, res, next) => {
             },
             updates,
             {
-                new: true,
+                returnDocument: "after",
                 runValidators: true
             }
         );
