@@ -4,8 +4,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
-import ProtectedRoute from './components/ProtectedRoute';
-import AdminRoute from "./components/AdminRoute";
+import ProtectedRoute from './routes/ProtectedRoute';
+import AdminRoute from "./routes/AdminRoute";
 
 function App() {
     return (

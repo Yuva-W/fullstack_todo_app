@@ -58,6 +58,7 @@ const getTodos = async (req, res, next) => {
             totalPages: Math.ceil(total / limit),
             todos
         });
+        
     } catch (error) {
         next(error);
     }
