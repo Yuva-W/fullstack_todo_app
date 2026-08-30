@@ -1,31 +1,27 @@
 const User = require("../models/user");
 const Todo = require("../models/todo");
 
-// const deleteMyAccount = async (req, res, next) => {
-//     try {
-//         const userId = req.user.userId;
+const getMe = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user.userId)
+            .select("-password");
 
-//         await Todo.deleteMany({
-//             user: userId
-//         });
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
 
-//         const user = await User.findByIdAndDelete(userId);
+        res.status(200).json({
+            success: true,
+            user
+        });
 
-//         if (!user) {
-//             return res.status(404).json({
-//                 success: false,
-//                 message: "User not found"
-//             });
-//         }
-
-//         res.status(200).json({
-//             success: true,
-//             message: "Account and all todos deleted successfully"
-//         });
-//     } catch (error) {
-//         next(error);
-//     }
-// };
+    } catch (error) {
+        next(error);
+    }
+};
 
 const deleteMyAccount = async (req, res, next) => {
     const session = await User.startSession();
@@ -69,5 +65,6 @@ const deleteMyAccount = async (req, res, next) => {
 };
 
 module.exports = {
+    getMe,
     deleteMyAccount
 };

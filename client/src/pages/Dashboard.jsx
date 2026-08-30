@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate } from 'react-router-dom';
+import Navbar from './../components/Navbar';
 
 
 function Dashboard() {
@@ -50,11 +51,6 @@ function Dashboard() {
         }
     }
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        navigate("/login");
-    }
-
     const editTodo = async (todo) => {
             const title = prompt("Enter new  title", todo.title);
             const description = prompt("Enter new  description", todo.description);
@@ -102,20 +98,15 @@ function Dashboard() {
     return(
         <div className="min-h-screen bg-gray-100 p-6">
 
-            <div className="max-w-5xl mx-auto">
+            <Navbar />
 
-                <div className="flex items-center justify-between mb-6 px-5">
+            <div className="max-w-5xl mx-auto mt-5">
+
+                <div className="mb-6 px-5">
 
                     <h1 className="text-3xl font-bold text-gray-800">
                         My Todos
                     </h1>
-
-                    <button 
-                        onClick={handleLogout}
-                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
-                    >
-                        Logout
-                    </button>
 
                 </div>
 

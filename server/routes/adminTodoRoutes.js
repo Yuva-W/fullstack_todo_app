@@ -2,7 +2,7 @@ const express = require("express");
 
 const authMiddleware = require("../middleware/authMiddleware");
 const adminMiddleware = require("../middleware/adminMiddleware");
-const { getAllTodos, getTodoById, deleteTodo } = require("../controllers/adminTodoController");
+const { getAllTodos, getTodoById, deleteTodo, getUserTodos } = require("../controllers/adminTodoController");
 
 const router = express.Router();
 
@@ -26,5 +26,13 @@ router.delete(
     adminMiddleware,
     deleteTodo
 );
+
+router.get(
+    "/user/:id",
+    authMiddleware,
+    adminMiddleware,
+    getUserTodos
+);
+
 
 module.exports = router;

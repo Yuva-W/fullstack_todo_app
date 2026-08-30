@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from "./components/AdminRoute";
 
 function App() {
     return (
@@ -17,7 +18,11 @@ function App() {
                         <Dashboard />
                     </ProtectedRoute>
                     } />
-                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin" element={
+                    <AdminRoute>
+                        <AdminDashboard />
+                    </AdminRoute>
+                    } />
             </Routes>
         </BrowserRouter>
     );

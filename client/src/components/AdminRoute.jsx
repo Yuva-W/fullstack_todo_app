@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-function ProtectedRoute({ children }) {
+function AdminRoute({ children }) {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -9,13 +9,18 @@ function ProtectedRoute({ children }) {
     }
 
     try {
-        jwtDecode(token);
+        const decoded = jwtDecode(token);
+
+        if (decoded.role !== "admin") {
+            return <Navigate to="/dashboard" replace />;
+        }
 
         return children;
+
     } catch (error) {
         localStorage.removeItem("token");
         return <Navigate to="/login" replace />;
     }
 }
 
-export default ProtectedRoute;
+export default AdminRoute;

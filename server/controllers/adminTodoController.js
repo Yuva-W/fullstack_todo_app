@@ -83,8 +83,27 @@ const deleteTodo = async (req, res, next) => {
     }
 };
 
+const getUserTodos = async (req, res, next) => {
+    try {
+        const todos = await Todo.find({
+            user: req.params.id
+        })
+            .populate("user", "name email")
+            .sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            count: todos.length,
+            todos
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     getAllTodos,
     getTodoById,
-    deleteTodo
+    deleteTodo,
+    getUserTodos
 };

@@ -1,14 +1,17 @@
 const express = require("express");
 
 const authMiddleware = require("../middleware/authMiddleware");
-const { deleteMyAccount } = require("../controllers/userController");
+const {
+    getMe,
+    deleteMyAccount
+} = require("../controllers/userController");
 
 const router = express.Router();
 
-router.delete(
+router.get(
     "/me",
     authMiddleware,
-    deleteMyAccount
+    getMe
 );
 
 module.exports = router;
