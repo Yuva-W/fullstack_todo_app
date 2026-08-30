@@ -9,7 +9,13 @@ function ProtectedRoute({ children }) {
     }
 
     try {
-        jwtDecode(token);
+        const decoded = jwtDecode(token);
+
+        // Token expired
+        if (decoded.exp * 1000 < Date.now()) {
+            localStorage.removeItem("token");
+            return <Navigate to="/login" replace />;
+        }
 
         return children;
     } catch (error) {

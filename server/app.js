@@ -27,6 +27,15 @@ app.use("/api/admin/todos", adminTodoRoutes);
 
 app.use("/api/users", userRoutes);
 
+app.use((req, res, next) => {
+    res.status(404).json({
+        success: false,
+        message: "API endpoint not found"
+    });
+});
+
+app.use(errorMiddleware);
+
 // Error middleware must be last
 app.use(errorMiddleware);
 
